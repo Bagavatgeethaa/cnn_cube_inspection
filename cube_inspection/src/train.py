@@ -5,6 +5,7 @@ import torch.nn as nn
 
 from torch.optim import AdamW
 from torch.amp import GradScaler, autocast
+from torch.optim.lr_scheduler import CosineAnnealingLR
 
 from tqdm import tqdm
 
@@ -96,6 +97,10 @@ optimizer = AdamW(
     weight_decay=WEIGHT_DECAY,
 )
 
+scheduler = CosineAnnealingLR(
+    optimizer,
+    T_max=NUM_EPOCHS
+)
 
 # ============================================================
 # Mixed precision
@@ -446,6 +451,11 @@ for epoch in range(
         f"{val_accuracy:.4f}"
     )
 
+    print(
+        f"Current LR: "
+        f"{scheduler.get_last_lr()[0]:.8f}"
+    )
+
 
     # ========================================================
     # Save BEST model
@@ -512,6 +522,13 @@ for epoch in range(
 
     print(
         "Latest checkpoint saved."
+    )
+
+    scheduler.step()
+
+    print(
+    f"Current LR: "
+    f"{scheduler.get_last_lr()[0]:.8f}"
     )
 
 

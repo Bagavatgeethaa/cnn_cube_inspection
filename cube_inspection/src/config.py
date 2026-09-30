@@ -27,19 +27,21 @@ NUM_CLASSES = 2
 
 CLASS_NAMES = [
     "bad",
-    "good",
+    "good"
 ]
 
 # ============================================================
 # Training
 # ============================================================
 
-IMAGE_SIZE = 224
-BATCH_SIZE = 4
+IMAGE_SIZE = 384
 
-NUM_EPOCHS = 50
+BATCH_SIZE = 8
 
-LEARNING_RATE = 0.0003
+NUM_EPOCHS = 100
+
+LEARNING_RATE = 3e-4
+
 WEIGHT_DECAY = 1e-4
 
 NUM_WORKERS = 0
@@ -49,7 +51,8 @@ NUM_WORKERS = 0
 # ============================================================
 
 DEVICE = torch.device(
-    "cuda" if torch.cuda.is_available() else "cpu"
+    "cuda" if torch.cuda.is_available()
+    else "cpu"
 )
 
 print(f"Using device: {DEVICE}")
