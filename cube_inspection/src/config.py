@@ -5,7 +5,14 @@ import torch
 # Paths
 # ============================================================
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+import sys
+from pathlib import Path
+
+# Fix path resolution for PyInstaller executable
+if getattr(sys, 'frozen', False):
+    PROJECT_ROOT = Path(sys.executable).resolve().parent
+else:
+    PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
 DATA_DIR = PROJECT_ROOT / "data"
 

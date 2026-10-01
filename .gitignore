@@ -7,3 +7,6 @@ build/
 venv/
 __pycache__/
 *.pyc
+*.exe
+*.csv
+*.spec
